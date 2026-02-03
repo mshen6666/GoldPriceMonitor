@@ -10,11 +10,11 @@
 - 价格趋势图（1小时 / 6小时 / 24小时 / 7天）
 
 ## 效果图
-![](docs/screenshots/main-window.png)
-![](docs/screenshots/chart-window.png)
-![](docs/screenshots/settings-window.png)
+![](docs/screenshots/1.png)
+![](docs/screenshots/2.png)
+![](docs/screenshots/3.png)
 
-> 提示：以上为占位图，请替换为真实截图。
+
 
 ## 环境要求
 - Windows 10/11
