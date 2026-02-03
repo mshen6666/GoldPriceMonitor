@@ -10,9 +10,9 @@
 - 价格趋势图（1小时 / 6小时 / 24小时 / 7天）
 
 ## 效果图
-![image-20260203104718754](C:\Users\mshen\AppData\Roaming\Typora\typora-user-images\image-20260203104718754.png)
-![](docs/screenshots/chart-window.svg![image-20260203104738136](C:\Users\mshen\AppData\Roaming\Typora\typora-user-images\image-20260203104738136.png)
-![](docs/screenshots/settings-window.svg![image-20260203104755051](C:\Users\mshen\AppData\Roaming\Typora\typora-user-images\image-20260203104755051.png)
+![](docs/screenshots/main-window.png)
+![](docs/screenshots/chart-window.png)
+![](docs/screenshots/settings-window.png)
 
 > 提示：以上为占位图，请替换为真实截图。
 
