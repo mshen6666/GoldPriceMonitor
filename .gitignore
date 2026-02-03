@@ -1,0 +1,18 @@
+﻿# .NET build outputs
+bin/
+obj/
+release/
+publish/
+
+# IDE
+.vs/
+.playwright-mcp/
+
+# App data (local runs)
+**/settings.json
+**/logs/
+
+# OS
+Thumbs.db
+.DS_Store
+nul

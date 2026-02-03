@@ -1,0 +1,6 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#1E1E2E"/>
+  <rect x="40" y="40" width="720" height="370" rx="24" ry="24" fill="#252535" stroke="#FFD700" stroke-width="4"/>
+  <text x="400" y="210" fill="#FFFFFF" font-family="Segoe UI, Arial" font-size="28" text-anchor="middle">设置窗口截图占位</text>
+  <text x="400" y="250" fill="#B0B0B0" font-family="Segoe UI, Arial" font-size="16" text-anchor="middle">请替换为真实截图</text>
+</svg>

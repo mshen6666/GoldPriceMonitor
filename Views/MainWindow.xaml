@@ -1,0 +1,133 @@
+<Window x:Class="GoldPriceMonitor.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2006"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+        Title="金价监控" Height="320" Width="280"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        ResizeMode="NoResize" ShowInTaskbar="True" Topmost="True"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary Source="/Resources/Styles.xaml" />
+    </Window.Resources>
+
+    <Grid Margin="0,0,0,0">
+        <!-- 外边框 -->
+        <Border Background="Transparent"
+                BorderBrush="{StaticResource AccentColor}"
+                BorderThickness="2"
+                CornerRadius="15"
+                Effect="{StaticResource DropShadow}">
+            <!-- 内层圆角背景，避免遮挡外边框 -->
+            <Border Background="{StaticResource WindowBackground}" CornerRadius="13" Margin="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="45" />
+                    </Grid.RowDefinitions>
+
+                    <!-- 标题栏 -->
+                    <Border Grid.Row="0" Background="{StaticResource HeaderBackground}" CornerRadius="13,13,0,0"
+                            MouseLeftButtonDown="Window_MouseLeftButtonDown">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="💰 金价监控" Foreground="White"
+                                       VerticalAlignment="Center" Margin="10,0,0,0" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="1" Text="{Binding StatusMessage}" Foreground="{StaticResource TextSecondary}"
+                                       FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button x:Name="MinimizeButton" Content="─" Width="30" Height="30"
+                                        Background="Transparent" Foreground="White" BorderThickness="0"
+                                        Click="MinimizeButton_Click" />
+                                <Button x:Name="CloseButton" Content="✕" Width="30" Height="30"
+                                        Background="Transparent" Foreground="White" BorderThickness="0"
+                                        Click="CloseButton_Click" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <!-- 价格内容 -->
+                    <Grid Grid.Row="1" Margin="15,10,15,10">
+                        <StackPanel>
+                            <!-- 伦敦金 -->
+                            <Border Background="{StaticResource CardBackground}" CornerRadius="8" Margin="0,0,0,8">
+                                <Grid Margin="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="伦敦金" Foreground="{StaticResource TextSecondary}" FontSize="11" />
+                                        <TextBlock Text="{Binding LondonGold.FormattedPrice, StringFormat={}{0} USD/oz}" Foreground="{StaticResource TextPrimary}"
+                                                   FontSize="20" FontWeight="Bold" />
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="1" Text="{Binding LondonGold.FormattedChange}"
+                                               Foreground="{Binding LondonGold.IsPositive, Converter={StaticResource BoolToColorConverter}}"
+                                               VerticalAlignment="Center" FontSize="12" />
+                                </Grid>
+                            </Border>
+
+                            <!-- 伦敦银 -->
+                            <Border Background="{StaticResource CardBackground}" CornerRadius="8" Margin="0,0,0,8">
+                                <Grid Margin="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="伦敦银" Foreground="{StaticResource TextSecondary}" FontSize="11" />
+                                        <TextBlock Text="{Binding LondonSilver.FormattedPrice, StringFormat={}{0} USD/oz}" Foreground="{StaticResource TextPrimary}"
+                                                   FontSize="20" FontWeight="Bold" />
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="1" Text="{Binding LondonSilver.FormattedChange}"
+                                               Foreground="{Binding LondonSilver.IsPositive, Converter={StaticResource BoolToColorConverter}}"
+                                               VerticalAlignment="Center" FontSize="12" />
+                                </Grid>
+                            </Border>
+
+                            <!-- 人民币金 -->
+                            <Border Background="{StaticResource CardBackground}" CornerRadius="8">
+                                <Grid Margin="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="人民币金 (元/克)" Foreground="{StaticResource TextSecondary}" FontSize="11" />
+                                        <TextBlock Text="{Binding CnyGold.FormattedPrice}" Foreground="{StaticResource CnyGoldColor}"
+                                                   FontSize="20" FontWeight="Bold" />
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="1" Text="{Binding CnyGold.FormattedChange}"
+                                               Foreground="{Binding CnyGold.IsPositive, Converter={StaticResource BoolToColorConverter}}"
+                                               VerticalAlignment="Center" FontSize="12" />
+                                </Grid>
+                            </Border>
+
+                            <!-- 更新时间 -->
+                            <TextBlock Text="{Binding LastUpdateTime}" Foreground="{StaticResource TextTertiary}"
+                                       FontSize="10" HorizontalAlignment="Center" Margin="0,8,0,0" />
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- 底部按钮 -->
+                    <Border Grid.Row="2" Background="{StaticResource FooterBackground}" CornerRadius="0,0,13,13">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Button Content="📈 图表" Background="{StaticResource SecondaryColor}"
+                                    Foreground="White" BorderThickness="0" Padding="15,5" Margin="0,0,10,0"
+                                    Click="ChartButton_Click" />
+                            <Button Content="⚙️ 设置" Background="{StaticResource SecondaryColor}"
+                                    Foreground="White" BorderThickness="0" Padding="15,5"
+                                    Click="SettingsButton_Click" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</Window>

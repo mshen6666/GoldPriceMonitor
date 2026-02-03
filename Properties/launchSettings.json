@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GoldPriceMonitor": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}
